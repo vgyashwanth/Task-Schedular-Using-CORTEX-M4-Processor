@@ -1,0 +1,2 @@
+../Src/IntExc.c:2:28:EnableExc	0	static,ignoring_inline_asm
+../Src/IntExc.c:9:28:DisableExc	0	static,ignoring_inline_asm

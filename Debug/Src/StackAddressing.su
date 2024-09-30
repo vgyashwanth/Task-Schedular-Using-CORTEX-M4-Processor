@@ -1,0 +1,5 @@
+../Src/StackAddressing.c:11:28:SetMSP	0	static,ignoring_inline_asm
+../Src/StackAddressing.c:20:6:InitializeTasksPrivateStack	24	static
+../Src/StackAddressing.c:74:11:GetCurrentPSP	4	static
+../Src/StackAddressing.c:79:28:ChangeSPtoPSP	0	static,ignoring_inline_asm
+../Src/StackAddressing.c:91:6:StoreCurrentPSP	16	static

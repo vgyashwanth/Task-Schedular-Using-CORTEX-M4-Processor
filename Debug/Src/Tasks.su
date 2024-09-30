@@ -1,0 +1,8 @@
+../Src/Tasks.c:9:6:Task1	16	static
+../Src/Tasks.c:17:6:Task2	16	static
+../Src/Tasks.c:25:6:Task3	16	static
+../Src/Tasks.c:33:6:Task4	16	static
+../Src/Tasks.c:41:6:IdleTask	4	static
+../Src/Tasks.c:47:6:UpdateTask	16	static
+../Src/Tasks.c:78:6:BlockTask	16	static
+../Src/Tasks.c:96:6:UpdateTaskState	16	static

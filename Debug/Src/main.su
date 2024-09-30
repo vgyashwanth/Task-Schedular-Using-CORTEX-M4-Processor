@@ -1,0 +1,10 @@
+../Src/main.c:33:5:main	8	static
+../Src/main.c:49:6:SysTick_Handler	8	static
+../Src/main.c:59:28:PendSV_Handler	0	static,ignoring_inline_asm
+../Src/main.c:84:6:EnableSystemFaults	16	static
+../Src/main.c:92:6:PendSVPriority	24	static
+../Src/main.c:98:6:SetPendSV	16	static
+../Src/main.c:105:6:HardFault_Handler	16	static
+../Src/main.c:111:6:MemManage_Handler	16	static
+../Src/main.c:117:6:BusFault_Handler	16	static
+../Src/main.c:125:6:UsageFault_Handler	16	static

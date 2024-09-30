@@ -1,0 +1,5 @@
+../Src/StackAddressing.c:11:28:SetMSP	1
+../Src/StackAddressing.c:20:6:InitializeTasksPrivateStack	3
+../Src/StackAddressing.c:74:11:GetCurrentPSP	1
+../Src/StackAddressing.c:79:28:ChangeSPtoPSP	1
+../Src/StackAddressing.c:91:6:StoreCurrentPSP	1
