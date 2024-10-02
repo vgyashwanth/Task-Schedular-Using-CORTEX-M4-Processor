@@ -23,22 +23,27 @@ void InitializeTasksPrivateStack(void){
 
         UserTasks[0].CurrentPSP = IDLE_STACK_START;
         UserTasks[0].Task_state = TASK_READY_STATE;
+        UserTasks[0].Task_priority = 255; /*Lowest priority*/
         UserTasks[0].TasksBaseAddress = IdleTask;
 
         UserTasks[1].CurrentPSP = T1_STACK_START;
         UserTasks[1].Task_state = TASK_READY_STATE;
+        UserTasks[1].Task_priority = 1; /*Static priority*/
         UserTasks[1].TasksBaseAddress = Task1;
 
         UserTasks[2].CurrentPSP = T2_STACK_START;
         UserTasks[2].Task_state = TASK_READY_STATE;
+        UserTasks[2].Task_priority = 2; /*Static priority*/
         UserTasks[2].TasksBaseAddress = Task2;
 
         UserTasks[3].CurrentPSP = T3_STACK_START;
         UserTasks[3].Task_state = TASK_READY_STATE;
+        UserTasks[3].Task_priority = 3; /*Static priority*/
         UserTasks[3].TasksBaseAddress = Task3;
 
         UserTasks[4].CurrentPSP = T4_STACK_START;
         UserTasks[4].Task_state = TASK_READY_STATE;
+        UserTasks[4].Task_priority = 4; /*Static priority*/
         UserTasks[4].TasksBaseAddress = Task4;
 
 
@@ -71,7 +76,9 @@ void InitializeTasksPrivateStack(void){
         EnableExc();
 
 
-}uint32_t GetCurrentPSP(void){
+}
+
+uint32_t GetCurrentPSP(void){
 
         return UserTasks[current_task].CurrentPSP;
 

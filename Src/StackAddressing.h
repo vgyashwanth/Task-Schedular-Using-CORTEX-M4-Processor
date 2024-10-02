@@ -12,7 +12,7 @@ it's because of stack mis allignment (not exactly known) so we have to subtract 
 */
 #define SRAM_END    (SRAM_START + SRAM_SIZE-0x8U) 
 
-#define MSP_START   ( (SRAM_END-(MAX_TASKS*TASK_PRIVATE_STACK_SIZE)) )   
+#define MSP_START   ( (SRAM_END-(MAX_TASKS*TASK_PRIVATE_STACK_SIZE)) )   /*Schedular Stack start */
 
 #define DUMMY_XPSR  (0x01000000U)
 #define LR_VAL      (0xFFFFFFFDU) 

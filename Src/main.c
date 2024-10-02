@@ -36,7 +36,7 @@ int main(void)
   EnableSystemFaults();
 	SetMSP();
   PendSVPriority(200);
-	InitializeTasksPrivateStack();
+  InitializeTasksPrivateStack();
   ConfigureSystickInterrupt(1000U);
   ChangeSPtoPSP();
   Task1();
@@ -66,7 +66,7 @@ __attribute__((naked))void PendSV_Handler(void){
   __asm volatile("STMDB R0!,{R4-R11}"); /*storing and updating the psp*/
   __asm volatile("PUSH {LR}");
   __asm volatile("BL StoreCurrentPSP");
-  __asm volatile("BL UpdateTask"); 
+  __asm volatile("BL ScheduleTask"); 
 
   /*Retreving the content of the new task going to execute*/
   __asm volatile("BL GetCurrentPSP");

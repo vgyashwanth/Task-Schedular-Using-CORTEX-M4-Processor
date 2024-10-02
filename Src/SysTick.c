@@ -18,7 +18,7 @@ void ConfigureSystickInterrupt(uint16_t time_ms){
     use SysTick peripheral register to configure the timer(1ms) and its interrupt
 
    */ 
-    uint16_t no_of_ticks = (time_ms*2000);
+    uint32_t no_of_ticks = (time_ms*2000);
     SYST_RVR = (no_of_ticks - 1); //for 1ms
     SYST_CVR = 0X00;
     /* enable interrupt and start the timer */

@@ -16,20 +16,19 @@
 #define T4_STACK_START ( (SRAM_END-(3*TASK_PRIVATE_STACK_SIZE)) )
 #define IDLE_STACK_START ( (SRAM_END-(4*TASK_PRIVATE_STACK_SIZE)) )
 
-typedef struct 
-{
-    /* data */
-    uint32_t CurrentPSP;
-    uint32_t block_tick;
-    uint8_t  Task_state;
-    void (*TasksBaseAddress)(void);
-
-}TCB;
-
 /*Stores the no of user tasks*/
 #define MAX_TASKS 5U
 
+typedef struct 
+{
+    /* data */
+    uint32_t CurrentPSP;  /*Stores the Run time PSP */
+    uint32_t block_tick;  /* Stores the block time Ticks */
+    uint8_t  Task_state; /* Defines the state BLOCK/READY */
+    uint8_t  Task_priority; /* Used to store the priority of the Task */
+    void (*TasksBaseAddress)(void); /*Return Address(PC) used only during Stack Frame initialization*/
 
+}TCB;
 
 /* Tasks declaration */
 void Task1(void);
@@ -39,7 +38,7 @@ void Task4(void);
 /*we need to run the idle task when all other tasks are blocked*/
 void IdleTask(void);
 void BlockTask(uint32_t ticks);
-void UpdateTask(void);
+void ScheduleTask(void);
 void UpdateTaskState(void);
 
 #endif

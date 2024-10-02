@@ -19,7 +19,7 @@ void Task2(void){
 
         /* write the application here */
         int a = 10;
-        BlockTask(10);
+        BlockTask(2);
     }
 }
 void Task3(void){
@@ -27,7 +27,7 @@ void Task3(void){
 
         /* write the application here */
         int a = 10;
-        BlockTask(10);
+        BlockTask(4);
     }
 }
 void Task4(void){
@@ -35,7 +35,7 @@ void Task4(void){
 
         /* write the application here */
        int a = 10; 
-        BlockTask(10);
+        BlockTask(6);
     }
 }
 void IdleTask(void){
@@ -44,26 +44,47 @@ void IdleTask(void){
 
 }
 
-void UpdateTask(void){
+void ScheduleTask(void){
     /*
+
     round robin scheduling algorithm
     checking for the ready tasks and updating the current_task var accordingly, 
     if all tasks are blocked then run idle task
     
     */
+   
     /*Disable all exceptions*/
         DisableExc();
 
     uint8_t state = TASK_BLOCK_STATE;
+    uint8_t previous_task_priority = UserTasks[current_task].Task_priority;
+    /* Edge case when current_task is highest priority but present in TASK_BLOCK_STATE */
 
-    for(int i =0;i<MAX_TASKS;i++){
+    if(UserTasks[current_task].Task_state == TASK_BLOCK_STATE){
+        /* Choose one task which is in Ready state then later compare the priorites */
+        for(uint8_t i=1; i<MAX_TASKS; i++){
 
-    current_task++;
-    current_task = (current_task % MAX_TASKS);
+            if( UserTasks[i].Task_state == TASK_READY_STATE){
+
+                previous_task_priority = UserTasks[i].Task_priority;
+                break;
+
+            }
+
+        }
+
+    }
+    for(uint8_t i =1;i<MAX_TASKS;i++){
+
     state = UserTasks[i].Task_state;
+    /*Iterating through all user Tasks and finding the Taks which is ready and low priority */
+    if( state == TASK_READY_STATE && UserTasks[i].Task_priority <= previous_task_priority )
+    {
+        current_task = i;
+        previous_task_priority = UserTasks[current_task].Task_priority;
 
-    if(state == TASK_READY_STATE && current_task != 0)
-            break;
+    }
+          
 
     }
     if(state == TASK_BLOCK_STATE)
@@ -81,7 +102,7 @@ void BlockTask(uint32_t ticks){
       /*Disable all exceptions*/
         DisableExc();
 
-    if(current_task != 0){
+    if(current_task != 0){ /* For avoiding blocking of IDLE Task */
 
     UserTasks[current_task].block_tick = (global_tick + ticks);
     UserTasks[current_task].Task_state = TASK_BLOCK_STATE;
