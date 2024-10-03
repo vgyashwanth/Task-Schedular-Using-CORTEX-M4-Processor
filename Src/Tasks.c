@@ -1,6 +1,7 @@
 #include"StackAddressing.h"
 #include"Tasks.h"
 #include"IntExc.h"
+#include"CriticalSection.h"
 extern uint8_t current_task;
 extern TCB UserTasks[MAX_TASKS];
 /* this value will get updated when Systick exception happens */
@@ -11,7 +12,8 @@ void Task1(void){
 
         /* write the application here */
         int a = 10;
-        BlockTask(10);
+        CriticalSection();
+        
     }
 }
 void Task2(void){
@@ -19,7 +21,7 @@ void Task2(void){
 
         /* write the application here */
         int a = 10;
-        BlockTask(2);
+        CriticalSection();
     }
 }
 void Task3(void){

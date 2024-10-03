@@ -1,3 +1,4 @@
+"./Src/CriticalSection.o"
 "./Src/IntExc.o"
 "./Src/Mutex.o"
 "./Src/StackAddressing.o"
