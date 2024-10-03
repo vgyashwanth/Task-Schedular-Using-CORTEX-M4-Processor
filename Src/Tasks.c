@@ -52,10 +52,8 @@ void ScheduleTask(void){
     if all tasks are blocked then run idle task
     
     */
-   
-    /*Disable all exceptions*/
-        DisableExc();
-
+    DisableExc();
+ 
     uint8_t state = TASK_BLOCK_STATE;
     uint8_t previous_task_priority = UserTasks[current_task].Task_priority;
     /* Edge case when current_task is highest priority but present in TASK_BLOCK_STATE */
@@ -85,14 +83,11 @@ void ScheduleTask(void){
 
     }
           
-
     }
     if(state == TASK_BLOCK_STATE)
         current_task = 0;
-
-     /* Enable all Exceptions */
-        EnableExc();
-
+    
+    EnableExc();
 
 }
 

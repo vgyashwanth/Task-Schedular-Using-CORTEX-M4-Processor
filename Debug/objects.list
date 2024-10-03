@@ -1,4 +1,5 @@
 "./Src/IntExc.o"
+"./Src/Mutex.o"
 "./Src/StackAddressing.o"
 "./Src/SysTick.o"
 "./Src/Tasks.o"

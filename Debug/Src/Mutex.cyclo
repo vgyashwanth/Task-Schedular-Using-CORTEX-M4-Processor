@@ -1,0 +1,4 @@
+../Src/Mutex.c:7:10:MutexAvailable	1
+../Src/Mutex.c:11:6:TakeMutex	2
+../Src/Mutex.c:17:6:ReleaseMutex	2
+../Src/Mutex.c:23:6:IncreasePriority	1

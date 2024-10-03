@@ -6,6 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Src/IntExc.c \
+../Src/Mutex.c \
 ../Src/StackAddressing.c \
 ../Src/SysTick.c \
 ../Src/Tasks.c \
@@ -15,6 +16,7 @@ C_SRCS += \
 
 OBJS += \
 ./Src/IntExc.o \
+./Src/Mutex.o \
 ./Src/StackAddressing.o \
 ./Src/SysTick.o \
 ./Src/Tasks.o \
@@ -24,6 +26,7 @@ OBJS += \
 
 C_DEPS += \
 ./Src/IntExc.d \
+./Src/Mutex.d \
 ./Src/StackAddressing.d \
 ./Src/SysTick.d \
 ./Src/Tasks.d \
@@ -39,7 +42,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/IntExc.cyclo ./Src/IntExc.d ./Src/IntExc.o ./Src/IntExc.su ./Src/StackAddressing.cyclo ./Src/StackAddressing.d ./Src/StackAddressing.o ./Src/StackAddressing.su ./Src/SysTick.cyclo ./Src/SysTick.d ./Src/SysTick.o ./Src/SysTick.su ./Src/Tasks.cyclo ./Src/Tasks.d ./Src/Tasks.o ./Src/Tasks.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+	-$(RM) ./Src/IntExc.cyclo ./Src/IntExc.d ./Src/IntExc.o ./Src/IntExc.su ./Src/Mutex.cyclo ./Src/Mutex.d ./Src/Mutex.o ./Src/Mutex.su ./Src/StackAddressing.cyclo ./Src/StackAddressing.d ./Src/StackAddressing.o ./Src/StackAddressing.su ./Src/SysTick.cyclo ./Src/SysTick.d ./Src/SysTick.o ./Src/SysTick.su ./Src/Tasks.cyclo ./Src/Tasks.d ./Src/Tasks.o ./Src/Tasks.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
 
 .PHONY: clean-Src
 

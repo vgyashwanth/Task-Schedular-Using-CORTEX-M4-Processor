@@ -4,5 +4,5 @@
 ../Src/Tasks.c:33:6:Task4	1
 ../Src/Tasks.c:41:6:IdleTask	1
 ../Src/Tasks.c:47:6:ScheduleTask	8
-../Src/Tasks.c:99:6:BlockTask	2
-../Src/Tasks.c:117:6:UpdateTaskState	4
+../Src/Tasks.c:94:6:BlockTask	2
+../Src/Tasks.c:112:6:UpdateTaskState	4

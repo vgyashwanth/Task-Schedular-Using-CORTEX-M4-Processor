@@ -20,6 +20,8 @@
 #include"Tasks.h"
 #include"StackAddressing.h"
 #include"SysTick.h"
+#include"IntExc.h"
+#include"Mutex.h"
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
@@ -47,7 +49,7 @@ int main(void)
 
 
 void SysTick_Handler(void){
-
+   
   /*Update the global tick*/
     global_tick++;
   /* Change the state of task if requried block time is elapsed */
@@ -57,26 +59,24 @@ void SysTick_Handler(void){
 
 }
 __attribute__((naked))void PendSV_Handler(void){
-
   /* When interrupt occur stacking will takeplace and psp get updated */
   /* MSP is used in handler mode for storing any intermediate values */
 	/* Save the remaining register using updated psp */
   /*Save the content of the current task*/
+  __asm volatile("PUSH {LR}");
   __asm volatile("MRS R0,PSP");
   __asm volatile("STMDB R0!,{R4-R11}"); /*storing and updating the psp*/
-  __asm volatile("PUSH {LR}");
-  __asm volatile("BL StoreCurrentPSP");
-  __asm volatile("BL ScheduleTask"); 
-
+  __asm volatile("BL StoreCurrentPSP"); /* Inline because need to pass R0-Register */
+    ScheduleTask();
   /*Retreving the content of the new task going to execute*/
-  __asm volatile("BL GetCurrentPSP");
-  __asm volatile("POP {LR}");
+    GetCurrentPSP();
   /* for unstacking the R4-R11 Registers */
   __asm volatile("LDMIA R0!,{R4-R11}");
-
   /* Update the psp value to unstack the interrupt stack frame and exit from the interrupt*/
   __asm volatile("MSR PSP,R0");
+  __asm volatile("POP {LR}");
   __asm volatile("BX LR");
+   
 
 }
 
@@ -105,27 +105,34 @@ void SetPendSV(void){
 void HardFault_Handler(void){
 
   /*Write code here*/
-  int a = 10;
+
+  uint32_t a = *((uint32_t *)0xE000ED2C);
+
 
 }
 void MemManage_Handler(void){
   
   /*Write code here*/
-  int a = 10;
+
+   uint32_t a = *((uint32_t *)0xE000ED28);
+
 
 }
 void BusFault_Handler(void){
-
-   
+ 
   /*Write code here*/
-  int a = 10;
+ 
+   uint32_t a = *((uint32_t *)0xE000ED29);
+
 
 }
 
 void UsageFault_Handler(void){
 
    /*Write code here*/
-  int a = 10;
+
+   uint32_t a = *((uint32_t *)0xE000ED2A);
+
 
 }
 

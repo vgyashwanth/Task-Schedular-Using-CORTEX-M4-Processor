@@ -13,7 +13,8 @@ __attribute__((naked))void SetMSP(void){
     /* to access the MSP use inline assembly */
     __asm volatile("MOV R0,%0":/*output operands*/:"r"(MSP_START):);
     __asm volatile("MSR MSP,R0");
-    __asm volatile("BX LR"); /* return back to the caller */
+    __asm volatile("BX LR");
+    
 
 
 }
@@ -84,21 +85,25 @@ uint32_t GetCurrentPSP(void){
 
 }
 __attribute__((naked))void ChangeSPtoPSP(void){
-
-        __asm volatile("PUSH {LR}"); /* to store the LR before calling other function*/
+      
+	__asm volatile("PUSH {LR}");
         __asm volatile("BL GetCurrentPSP");
+        /*If we write __asm volatile("POP {LR}"); at bottom then cpu refer to PSP which is invalid HardFault()*/
+         __asm volatile("POP {LR}");
         __asm volatile("MSR PSP,R0"); /* the return value of the function just called above will store in R0 as per AAPCS*/
-        __asm volatile("POP {LR}"); /* get back the value into LR */
         __asm volatile("MOV R0,#0X02");
         __asm volatile("MSR CONTROL,R0"); /* change to SP to PSP*/
-        __asm volatile("BX LR"); /* return back to the caller */
+       
+        __asm volatile("BX LR");
+
+
 
 
 }
 void StoreCurrentPSP(uint32_t current_psp_val){
-      /*Disable all exceptions*/
-        DisableExc();
+
+     DisableExc();
     UserTasks[current_task].CurrentPSP = current_psp_val;
-      /* Enable all Exceptions */
-        EnableExc();
+     EnableExc();
+     
 }
